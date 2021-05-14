@@ -2,13 +2,16 @@
 <img src="/doc/image/logo.png"/>
 </div>
 
-## LibDriver ADS1115
+## LibDriver BMP180
 
 [English](/README.md) | [ 简体中文](/README_CN.md)
 
+The BMP180 is the function compatible successor of the BMP085, a new generation of high precision digital pressure sensors for consumer applications.The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones, PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at fast conversion time, the BMP180 offers superior performance. The IIC interface allows for easy system integration with a microcontroller.The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as well as long term stability.
+
+LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on.
+
 ### Table of Contents
 
-  - [Description](#Description)
   - [Instruction](#Instruction)
   - [Install](#Install)
   - [Usage](#Usage)
@@ -17,13 +20,6 @@
   - [Contributing](#Contributing)
   - [License](#License)
   - [Contact Us](#Contact-Us)
-
-
-### Description
-
-The BMP180 is the function compatible successor of the BMP085, a new generation of high precision digital pressure sensors for consumer applications.The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones, PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at fast conversion time, the BMP180 offers superior performance. The IIC interface allows for easy system integration with a microcontroller.The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as well as long term stability.
-
-LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on.
 
 ### Instruction
 
