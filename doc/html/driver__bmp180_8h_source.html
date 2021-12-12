@@ -24,6 +24,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Doxygen.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">LibDriver BMP180
    &#160;<span id="projectnumber">2.0.0</span>
@@ -105,7 +106,7 @@ $(document).ready(function(){initNavTree('driver__bmp180_8h_source.html',''); in
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aa5750e2b406826a0d4e0183dc4caaba26">   66</a></span>&#160;    <a class="code" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aa5750e2b406826a0d4e0183dc4caaba26">BMP180_MODE_STANDARD</a>   = 0x01,        </div>
 <div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aabf744f133b76608f08deee7086d959ad">   67</a></span>&#160;    <a class="code" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aabf744f133b76608f08deee7086d959ad">BMP180_MODE_HIGH</a>       = 0x02,        </div>
 <div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aaea72c0b974d4959a6e482cdc4236b1b3">   68</a></span>&#160;    <a class="code" href="group__bmp180__base__driver.html#gga25bd249f813d82067bd15f084c44c15aaea72c0b974d4959a6e482cdc4236b1b3">BMP180_MODE_ULTRA_HIGH</a> = 0x03,        </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}<a class="code" href="group__bmp180__base__driver.html#ga25bd249f813d82067bd15f084c44c15a">bmp180_mode_t</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <a class="code" href="group__bmp180__base__driver.html#ga25bd249f813d82067bd15f084c44c15a">bmp180_mode_t</a>;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="structbmp180__handle__s.html">   74</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structbmp180__handle__s.html">bmp180_handle_s</a></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;{</div>
@@ -128,7 +129,7 @@ $(document).ready(function(){initNavTree('driver__bmp180_8h_source.html',''); in
 <div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structbmp180__handle__s.html#ab5bab0ce1df56329443cffc5c4122616">   92</a></span>&#160;    int16_t <a class="code" href="structbmp180__handle__s.html#ab5bab0ce1df56329443cffc5c4122616">mc</a>;                                                                         </div>
 <div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="structbmp180__handle__s.html#a89d3671d811734895331def35ec5ebd4">   93</a></span>&#160;    int16_t <a class="code" href="structbmp180__handle__s.html#a89d3671d811734895331def35ec5ebd4">md</a>;                                                                         </div>
 <div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="structbmp180__handle__s.html#ad5d90485f11e26651feca4b3d108d9a5">   94</a></span>&#160;    uint8_t <a class="code" href="structbmp180__handle__s.html#ad5d90485f11e26651feca4b3d108d9a5">oss</a>;                                                                        </div>
-<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#ga5933a1e4292ed8d1c3274b6824dd5549">   95</a></span>&#160;}<a class="code" href="group__bmp180__base__driver.html#ga5933a1e4292ed8d1c3274b6824dd5549">bmp180_handle_t</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#ga5933a1e4292ed8d1c3274b6824dd5549">   95</a></span>&#160;} <a class="code" href="group__bmp180__base__driver.html#ga5933a1e4292ed8d1c3274b6824dd5549">bmp180_handle_t</a>;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="structbmp180__info__s.html">  100</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structbmp180__info__s.html">bmp180_info_s</a></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
@@ -141,7 +142,7 @@ $(document).ready(function(){initNavTree('driver__bmp180_8h_source.html',''); in
 <div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="structbmp180__info__s.html#a8f9dbe66ac0b66ebae0a36fcb4ba368e">  108</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structbmp180__info__s.html#a8f9dbe66ac0b66ebae0a36fcb4ba368e">temperature_min</a>;             </div>
 <div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="structbmp180__info__s.html#a3366a5dce9b829e03c3d321c2b4df3f6">  109</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="structbmp180__info__s.html#a3366a5dce9b829e03c3d321c2b4df3f6">temperature_max</a>;             </div>
 <div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="structbmp180__info__s.html#a41b0bd442708b70d252c50b92c75265a">  110</a></span>&#160;    uint32_t <a class="code" href="structbmp180__info__s.html#a41b0bd442708b70d252c50b92c75265a">driver_version</a>;           </div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#ga12aefbff00bb8bb705fe8048cc8c4722">  111</a></span>&#160;}<a class="code" href="group__bmp180__base__driver.html#ga12aefbff00bb8bb705fe8048cc8c4722">bmp180_info_t</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="group__bmp180__base__driver.html#ga12aefbff00bb8bb705fe8048cc8c4722">  111</a></span>&#160;} <a class="code" href="group__bmp180__base__driver.html#ga12aefbff00bb8bb705fe8048cc8c4722">bmp180_info_t</a>;</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="group__bmp180__link__driver.html#gad39ab646ca66d5fb2db4e9a1cb354d6a">  130</a></span>&#160;<span class="preprocessor">#define DRIVER_BMP180_LINK_INIT(HANDLE, STRUCTURE)   memset(HANDLE, 0, sizeof(STRUCTURE))</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
