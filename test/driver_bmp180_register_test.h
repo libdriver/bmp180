@@ -35,8 +35,8 @@
  * </table>
  */
 
-#ifndef _DRIVER_BMP180_REGISTER_TEST_H_
-#define _DRIVER_BMP180_REGISTER_TEST_H_
+#ifndef DRIVER_BMP180_REGISTER_TEST_H
+#define DRIVER_BMP180_REGISTER_TEST_H
 
 #include "driver_bmp180_interface.h"
 

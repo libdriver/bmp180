@@ -48,7 +48,7 @@ static bmp180_handle_t gs_handle;        /**< bmp180 handle */
  */
 uint8_t bmp180_basic_init(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     
     /* link interface function */
     DRIVER_BMP180_LINK_INIT(&gs_handle, bmp180_handle_t); 
@@ -61,7 +61,7 @@ uint8_t bmp180_basic_init(void)
     
     /* bmp180 init */
     res = bmp180_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: init failed.\n");
         
@@ -70,10 +70,10 @@ uint8_t bmp180_basic_init(void)
     
     /* set mode */
     res = bmp180_set_mode(&gs_handle, BMP180_BASIC_DEFAULT_MODE);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set mode failed.\n");
-        bmp180_deinit(&gs_handle);
+        (void)bmp180_deinit(&gs_handle);
         
         return 1;
     }
@@ -92,12 +92,12 @@ uint8_t bmp180_basic_init(void)
  */
 uint8_t bmp180_basic_read(float *temperature, uint32_t *pressure)
 {
-    volatile uint16_t temperature_yaw;
-    volatile uint32_t pressure_yaw;
+    uint16_t temperature_yaw;
+    uint32_t pressure_yaw;
     
     /* read temperature and pressure */
     if (bmp180_read_temperature_pressure(&gs_handle, (uint16_t *)&temperature_yaw, 
-                                            temperature, (uint32_t *)&pressure_yaw, pressure))
+                                            temperature, (uint32_t *)&pressure_yaw, pressure) != 0)
     {
         return 1;
     }
@@ -117,7 +117,7 @@ uint8_t bmp180_basic_read(float *temperature, uint32_t *pressure)
 uint8_t bmp180_basic_deinit(void)
 {
     /* close bmp180 */
-    if (bmp180_deinit(&gs_handle))
+    if (bmp180_deinit(&gs_handle) != 0)
     {
         return 1;
     }

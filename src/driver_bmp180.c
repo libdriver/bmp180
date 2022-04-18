@@ -97,10 +97,16 @@
  *             - 1 read failed
  * @note       none
  */
-static uint8_t _bmp180_iic_read(bmp180_handle_t *handle, uint8_t addr, uint8_t reg, uint8_t *data)
+static uint8_t a_bmp180_iic_read(bmp180_handle_t *handle, uint8_t addr, uint8_t reg, uint8_t *data)
 {
-    /* read bytes */
-    return handle->iic_read(addr, reg, data, 1);
+    if (handle->iic_read(addr, reg, data, 1) != 0)        /* read */
+    {
+        return 1;                                         /* return error */
+    }
+    else
+    {
+        return 0;                                         /* success return 0 */
+    }
 }
 
 /**
@@ -114,10 +120,16 @@ static uint8_t _bmp180_iic_read(bmp180_handle_t *handle, uint8_t addr, uint8_t r
  *            - 1 write failed
  * @note      none
  */
-static uint8_t _bmp180_iic_write(bmp180_handle_t *handle, uint8_t addr, uint8_t reg, uint8_t data)
+static uint8_t a_bmp180_iic_write(bmp180_handle_t *handle, uint8_t addr, uint8_t reg, uint8_t data)
 {
-    /* write bytes */
-    return handle->iic_write(addr, reg, &data, 1);
+    if (handle->iic_write(addr, reg, &data, 1) != 0)        /* write */
+    {
+        return 1;                                           /* return error */
+    }
+    else
+    {
+        return 0;                                           /* success return 0 */
+    }
 }
 
 /**
@@ -134,10 +146,10 @@ static uint8_t _bmp180_iic_write(bmp180_handle_t *handle, uint8_t addr, uint8_t 
  */
 uint8_t bmp180_init(bmp180_handle_t *handle)
 {
-    volatile uint8_t buf[22];
-    volatile int16_t temp1 = 0;
-    volatile uint16_t temp2 = 0;
-    volatile uint8_t id;
+    uint8_t buf[22];
+    int16_t temp1 = 0;
+    uint16_t temp2 = 0;
+    uint8_t id;
     
     if (handle == NULL)                                                                  /* check handle */
     {
@@ -178,30 +190,30 @@ uint8_t bmp180_init(bmp180_handle_t *handle)
         return 3;                                                                        /* return error */
     }
     
-    if (handle->iic_init())                                                              /* iic init */
+    if (handle->iic_init() != 0)                                                         /* iic init */
     {
         handle->debug_print("bmp180: iic init failed.\n");                               /* iic init failed */
         
         return 1;                                                                        /* return error */
     }
-    if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_ID, (uint8_t *)&id))         /* read chip id */
+    if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_ID, (uint8_t *)&id) != 0)   /* read chip id */
     {
         handle->debug_print("bmp180: read id failed.\n");                                /* read id failed */
-        handle->iic_deinit();                                                            /* iic deinit */
+        (void)handle->iic_deinit();                                                      /* iic deinit */
         
         return 1;                                                                        /* return error */
     }
     if (id != 0x55)                                                                      /* check id */
     {
         handle->debug_print("bmp180: id is error.\n");                                   /* id is error */
-        handle->iic_deinit();                                                            /* iic deinit */
+        (void)handle->iic_deinit();                                                      /* iic deinit */
         
         return 4;                                                                        /* return error */
     }
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_AC1_MSB, (uint8_t *)buf, 22))        /* read ac1-md */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_AC1_MSB, (uint8_t *)buf, 22) != 0)   /* read ac1-md */
     {
         handle->debug_print("bmp180: read AC1_MSB-MD_LSB failed.\n");                    /* read ac1 -md failed */
-        handle->iic_deinit();                                                            /* deinit iic */
+        (void)handle->iic_deinit();                                                      /* deinit iic */
         
         return 5;                                                                        /* return error */
     }
@@ -273,7 +285,7 @@ uint8_t bmp180_deinit(bmp180_handle_t *handle)
         return 3;                                                   /* return error */
     }
     
-    if (handle->iic_deinit())                                       /* iic deinit */
+    if (handle->iic_deinit() != 0)                                  /* iic deinit */
     {
         handle->debug_print("bmp180: iic deinit failed.\n");        /* iic deinit failed */
         
@@ -296,18 +308,18 @@ uint8_t bmp180_deinit(bmp180_handle_t *handle)
  */
 uint8_t bmp180_set_mode(bmp180_handle_t *handle, bmp180_mode_t mode)
 {
-    if (handle == NULL)             /* check handle */
+    if (handle == NULL)                 /* check handle */
     {
-        return 2;                   /* return error */
+        return 2;                       /* return error */
     }
-    if (handle->inited != 1)        /* check handle initialization */
+    if (handle->inited != 1)            /* check handle initialization */
     {
-        return 3;                   /* return error */
+        return 3;                       /* return error */
     }
     
-    handle->oss = mode;             /* set mode */
+    handle->oss = (uint8_t)mode;        /* set mode */
     
-    return 0;                       /* success return 0 */
+    return 0;                           /* success return 0 */
 }
 
 /**
@@ -350,11 +362,11 @@ uint8_t bmp180_get_mode(bmp180_handle_t *handle, bmp180_mode_t *mode)
  */
 uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *pa)
 {
-    volatile uint8_t buf[3];
-    volatile uint8_t status;
-    volatile uint16_t num;
-    volatile int32_t ut = 0, up = 0, x1 ,x2, x3, b5, b6, b3, p;
-    volatile uint32_t b4,b7;
+    uint8_t buf[3];
+    uint8_t status;
+    uint16_t num;
+    int32_t ut = 0, up = 0, x1 ,x2, x3, b5, b6, b3, p;
+    uint32_t b4,b7;
     
     if (handle == NULL)                                                                                /* check handle */
     {
@@ -366,7 +378,7 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     }
     
     num = 5000;                                                                                        /* set timeout 5000 ms */
-    if (_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E))                         /* write temperature measurement command */
+    if (a_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E) != 0)                   /* write temperature measurement command */
     {
         handle->debug_print("bmp180: write CTRL_MEAS failed.\n");                                      /* write CTRL_MEAS failed */
         
@@ -375,7 +387,7 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     while (num != 0)                                                                                   /* check times */
     {
         handle->delay_ms(1);                                                                           /* wait 1 ms */
-        if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status))        /* read ctrl status */
+        if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status) != 0)  /* read ctrl status */
         {
             handle->debug_print("bmp180: read CTRL_MEAS failed.\n");                                   /* return ctrl meas failed */
             
@@ -396,7 +408,8 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     return 1;                                                                                          /* return error */
     
     t_read:
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2))                       /* read raw temperature */
+    memset(buf, 0, sizeof(uint8_t) * 3);                                                               /* clear the buffer */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2) != 0)                  /* read raw temperature */
     {
         handle->debug_print("bmp180: read OUT MSB LSB failed.\n");                                     /* read OUT MSB LSB failed */
         
@@ -404,8 +417,8 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     }
     ut = buf[0] << 8;                                                                                  /* get MSB */
     ut = ut | buf[1];                                                                                  /* get LSB */
-    ut = ut & 0x0000ffff;                                                                              /* get valid part */
-    if (_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x34+(handle->oss<<6)))        /* write pressure measurement command */
+    ut = ut & 0x0000FFFFU;                                                                             /* get valid part */
+    if (a_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x34+(handle->oss<<6)) != 0)  /* write pressure measurement command */
     {
         handle->debug_print("bmp180: write CTRL_MEAS failed.\n");                                      /* write CTRL_MEAS failed */
         
@@ -415,7 +428,7 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     while (num != 0)                                                                                   /* check times */
     {
         handle->delay_ms(1);                                                                           /* wait 1 ms */
-        if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status))        /* read status */
+        if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status) != 0)  /* read status */
         {
             handle->debug_print("bmp180: read CTRL_MEAS failed.\n");                                   /* read CTRL_MEAS failed */
             
@@ -436,7 +449,8 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     return 1;                                                                                          /* return error */
     
     p_read:
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,3))                       /* read pressure */
+    memset(buf, 0, sizeof(uint8_t) * 3);                                                               /* clear the buffer */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,3) != 0)                  /* read pressure */
     {
         handle->debug_print("bmp180: read OUT MSB LSB XLSB failed.\n");                                /* read OUT MSB LSB XLSB failed */
         
@@ -450,19 +464,19 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     up = up >> (8-handle->oss);                                                                        /* shift */
     if (handle->oss == 0)                                                                              /* ultra low */
     {
-        up = up & 0x0000ffff;                                                                          /* set mask */
+        up = up & 0x0000FFFFU;                                                                         /* set mask */
     }
     else if (handle->oss == 1)                                                                         /* standard */
     {
-        up = up & 0x0001ffff;                                                                          /* set mask */
+        up = up & 0x0001FFFFU;                                                                         /* set mask */
     }
     else if (handle->oss == 2)                                                                         /* high */
     {
-        up= up & 0x0003ffff;                                                                           /* set mask */
+        up= up & 0x0003FFFFU;                                                                          /* set mask */
     }
     else if (handle->oss == 3)                                                                         /* ultra high */
     {
-        up = up & 0x0007ffff;                                                                          /* set mask */
+        up = up & 0x0007FFFFU;                                                                         /* set mask */
     }
     else
     {
@@ -483,7 +497,7 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
     x3 = ((x1 + x2) + 2) >> 2;                                                                         /* calculate x3 */
     b4 = (uint32_t)((((uint32_t)handle->ac4 * (uint32_t)(x3 + 32768))) >> 15);                         /* calculate b4 */
     b7 = (uint32_t)((uint32_t)(up - b3) * (50000>>handle->oss));                                       /* calculate b7 */
-    if (b7 < 0x80000000)
+    if (b7 < 0x80000000U)
     {
         p = (int32_t)((b7 << 1) / b4);                                                                 /* calculate p */
     }
@@ -513,10 +527,10 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
  */
 uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c)
 {
-    volatile uint8_t buf[3];
-    volatile uint8_t status;
-    volatile uint16_t num;
-    volatile int32_t ut = 0, x1 ,x2, b5;
+    uint8_t buf[3];
+    uint8_t status;
+    uint16_t num;
+    int32_t ut = 0, x1 ,x2, b5;
     
     if (handle == NULL)                                                                                /* check handle */
     {
@@ -528,7 +542,7 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
     }
     
     num = 5000;                                                                                        /* set timeout 5000 */
-    if (_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E))                         /* write temperature measurement command */
+    if (a_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E) != 0)                   /* write temperature measurement command */
     {
         handle->debug_print("bmp180: write CTRL_MEAS failed.\n");                                      /* write CTRL_MEAS failed */
         
@@ -537,7 +551,7 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
     while (num != 0)                                                                                   /* check times */
     {
         handle->delay_ms(1);                                                                           /* delay 1 ms */
-        if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status))        /* read status */
+        if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status) != 0)  /* read status */
         {
             handle->debug_print("bmp180: read CTRL_MEAS failed.\n");                                   /* read CTRL_MEAS failed */
             
@@ -558,7 +572,8 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
     return 1;                                                                                          /* return error */
     
     t_read:
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2))                       /* read raw temperature */
+    memset(buf, 0, sizeof(uint8_t) * 3);                                                               /* clear the buffer */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2) != 0)                  /* read raw temperature */
     {
         handle->debug_print("bmp180: read OUT MSB LSB failed.\n");                                     /* read OUT MSB LSB failed */
         
@@ -566,8 +581,8 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
     }
     ut = buf[0] << 8;                                                                                  /* get MSB */
     ut = ut | buf[1];                                                                                  /* get LSB */
-    ut = ut & 0x0000ffff;                                                                              /* set mask */
-    *raw = ut;                                                                                         /* get raw temperature */
+    ut = ut & 0x0000FFFFU;                                                                             /* set mask */
+    *raw = (uint16_t)ut;                                                                               /* get raw temperature */
     x1 = (((ut - (int32_t)handle->ac6) * (int32_t)handle->ac5)) >> 15;                                 /* calculate x1 */
     x2 =(int32_t)((((int32_t)handle->mc) << 11) / (x1 + (int32_t)handle->md));                         /* calculate x2 */
     b5 = x1 + x2;                                                                                      /* calculate b5 */
@@ -593,11 +608,11 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
 uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temperature_raw, float *temperature_c, 
                                          uint32_t *pressure_raw, uint32_t *pressure_pa)
 {
-    volatile uint8_t buf[3];
-    volatile uint8_t status;
-    volatile uint16_t num;
-    volatile int32_t ut = 0, up = 0, x1 ,x2, x3, b5, b6, b3, p;
-    volatile uint32_t b4,b7;
+    uint8_t buf[3];
+    uint8_t status;
+    uint16_t num;
+    int32_t ut = 0, up = 0, x1 ,x2, x3, b5, b6, b3, p;
+    uint32_t b4,b7;
     
     if (handle == NULL)                                                                                /* check handle */
     {
@@ -609,7 +624,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     }
     
     num = 5000;                                                                                        /* set timeout 5000 */
-    if (_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E))                         /* write temperature measurement command */
+    if (a_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x2E) != 0)                   /* write temperature measurement command */
     {
         handle->debug_print("bmp180: write CTRL_MEAS failed.\n");                                      /* write CTRL_MEAS failed */
         
@@ -618,7 +633,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     while (num != 0)                                                                                   /* check times */
     {
         handle->delay_ms(1);                                                                           /* wait 1 ms */
-        if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status))        /* read status */
+        if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status) != 0)  /* read status */
         {
             handle->debug_print("bmp180: read CTRL_MEAS failed.\n");                                   /* read CTRL_MEAS failed */
             
@@ -639,7 +654,8 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     return 1;                                                                                          /* return error */
     
     t_read:
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2))                       /* read raw temperature */
+    memset(buf, 0, sizeof(uint8_t) * 3);                                                               /* clear the buffer */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,2) != 0)                  /* read raw temperature */
     {
         handle->debug_print("bmp180: read OUT MSB LSB failed.\n");                                     /* read OUT MSB LSB failed */
         
@@ -647,9 +663,9 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     }
     ut = buf[0] << 8;                                                                                  /* get MSB */
     ut = ut | buf[1];                                                                                  /* get LSB */
-    ut = ut & 0x0000ffff;                                                                              /* set mask */
-    *temperature_raw = ut;                                                                             /* get temperature */
-    if (_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x34+(handle->oss<<6)))        /* write pressure measurement command */
+    ut = ut & 0x0000FFFFU;                                                                             /* set mask */
+    *temperature_raw = (uint16_t)ut;                                                                   /* get temperature */
+    if (a_bmp180_iic_write(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, 0x34+(handle->oss<<6)) != 0)  /* write pressure measurement command */
     {
         handle->debug_print("bmp180: write CTRL_MEAS failed.\n");                                      /* write CTRL_MEAS failed */
         
@@ -659,7 +675,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     while (num != 0)                                                                                   /* check times */
     {
         handle->delay_ms(1);                                                                           /* wait 1 ms */
-        if (_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status))        /* read status */
+        if (a_bmp180_iic_read(handle, BMP180_ADDRESS, BMP180_REG_CTRL_MEAS, (uint8_t *)&status) != 0)  /* read status */
         {
             handle->debug_print("bmp180: read CTRL_MEAS failed.\n");                                   /* read CTRL_MEAS failed */
             
@@ -680,7 +696,8 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     return 1;                                                                                          /* return error */
     
     p_read:
-    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,3))                       /* read raw pressure */
+    memset(buf, 0, sizeof(uint8_t) * 3);                                                               /* clear the buffer */
+    if (handle->iic_read(BMP180_ADDRESS, BMP180_REG_OUT_MSB, (uint8_t *)buf ,3) != 0)                  /* read raw pressure */
     {
         handle->debug_print("bmp180: read OUT MSB LSB XLSB failed.\n");                                /* read OUT MSB LSB XLSB failed */
         
@@ -694,19 +711,19 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     up = up >> (8-handle->oss);                                                                        /* right shift */
     if (handle->oss == 0)                                                                              /* ultra low */
     {
-        up = up & 0x0000ffff;                                                                          /* set mask */
+        up = up & 0x0000FFFFU;                                                                         /* set mask */
     }
     else if (handle->oss == 1)                                                                         /* standard */
     {
-        up = up & 0x0001ffff;                                                                          /* set mask */
+        up = up & 0x0001FFFFU;                                                                         /* set mask */
     }
     else if (handle->oss == 2)                                                                         /* high */
     {
-        up= up & 0x0003ffff;                                                                           /* set mask */
+        up= up & 0x0003FFFFU;                                                                          /* set mask */
     }
     else if (handle->oss == 3)                                                                         /* ultra high */
     {
-        up = up & 0x0007ffff;                                                                          /* set mask */
+        up = up & 0x0007FFFFU;                                                                         /* set mask */
     }
     else
     {
@@ -728,7 +745,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     x3 = ((x1 + x2) + 2) >> 2;                                                                         /* calculate x3 */
     b4 = (uint32_t)((((uint32_t)handle->ac4 * (uint32_t)(x3 + 32768))) >> 15);                         /* calculate b4 */
     b7 = (uint32_t)((uint32_t)(up - b3) * (50000 >> handle->oss));                                     /* calculate b7 */
-    if (b7 < 0x80000000)
+    if (b7 < 0x80000000U)
     {
         p = (int32_t)((b7 << 1) / b4);                                                                 /* calculate p */
     }
@@ -767,7 +784,7 @@ uint8_t bmp180_set_reg(bmp180_handle_t *handle, uint8_t reg, uint8_t value)
         return 3;                                                        /* return error */
     } 
 
-    return _bmp180_iic_write(handle, BMP180_ADDRESS, reg, value);        /* write register */
+    return a_bmp180_iic_write(handle, BMP180_ADDRESS, reg, value);       /* write register */
 }
 
 /**
@@ -793,7 +810,7 @@ uint8_t bmp180_get_reg(bmp180_handle_t *handle, uint8_t reg, uint8_t *value)
         return 3;                                                       /* return error */
     } 
 
-    return _bmp180_iic_read(handle, BMP180_ADDRESS, reg, value);        /* read register */
+    return a_bmp180_iic_read(handle, BMP180_ADDRESS, reg, value);       /* read register */
 }
 
 /**

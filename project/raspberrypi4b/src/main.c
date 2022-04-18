@@ -112,7 +112,7 @@ uint8_t bmp180(uint8_t argc, char **argv)
             if (strcmp("reg", argv[2]) == 0)
             {
                 /* run reg test */
-                if (bmp180_register_test())
+                if (bmp180_register_test() != 0)
                 {
                     return 1;
                 }
@@ -144,7 +144,7 @@ uint8_t bmp180(uint8_t argc, char **argv)
             if (strcmp("read", argv[2]) == 0)
             {
                 /* run read test */
-                if (bmp180_read_test(atoi(argv[3])))
+                if (bmp180_read_test(atoi(argv[3])) != 0)
                 {
                     return 1;
                 }
@@ -167,25 +167,25 @@ uint8_t bmp180(uint8_t argc, char **argv)
             /* read function */
             if (strcmp("read", argv[2]) == 0)
             {
-                volatile uint8_t res;
-                volatile uint32_t times;
-                volatile uint32_t i;
-                volatile float temperature;
-                volatile uint32_t pressure;
+                uint8_t res;
+                uint32_t times;
+                uint32_t i;
+                float temperature;
+                uint32_t pressure;
                 
                 res = bmp180_basic_init();
-                if (res)
+                if (res != 0)
                 {
                     return 1;
                 }
                 times = atoi(argv[3]);
-                for (i=0; i<times; i++)
+                for (i = 0; i < times; i++)
                 {
                     bmp180_interface_delay_ms(1000);
                     res = bmp180_basic_read((float *)&temperature, (uint32_t *)&pressure);
-                    if (res)
+                    if (res != 0)
                     {
-                        bmp180_basic_deinit();
+                        (void)bmp180_basic_deinit();
                         
                         return 1;
                     }
@@ -193,7 +193,7 @@ uint8_t bmp180(uint8_t argc, char **argv)
                     bmp180_interface_debug_print("bmp180: temperature is %0.2fC.\n", temperature);
                     bmp180_interface_debug_print("bmp180: pressure is %dPa.\n", pressure);
                 }
-                bmp180_basic_deinit();
+                (void)bmp180_basic_deinit();
                 
                 return 0;
             }

@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver BMP180
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/bmp180/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/bmp180/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 BMP180是BMP085的功能兼容後繼產品，是新一代高性能消費類應用的精密數字壓力傳感器。 BMP180的超低功耗、低電壓供電經過特別優化設計，可用於移動電話、PDA、GPS導航設備和戶外設備。在只有0.25米的低海拔條件下擁有快速轉換時間，BMP180提供卓越的性能。 I2C接口允許與微控制器系統集成。 BMP180基於壓阻技術，具有EMC魯棒性、高精度和線性度以及長期穩定。
 
-LibDriver BMP180是LibDriver推出的BMP180的全功能驅動，該驅動提供溫度、壓力讀取和模式設置等功能。
+LibDriver BMP180是LibDriver推出的BMP180的全功能驅動，該驅動提供溫度、壓力讀取和模式設置等功能並且它符合MISRA標準。
 
 ### 目錄
 
@@ -56,7 +56,7 @@ float temperature;
 uint32_t pressure;
 
 res = bmp180_basic_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -67,9 +67,9 @@ for (i = 0; i < 3; i++)
 {
     bmp180_interface_delay_ms(1000);
     res = bmp180_basic_read((float *)&temperature, (uint32_t *)&pressure);
-    if (res)
+    if (res != 0)
     {
-        bmp180_basic_deinit();
+        (void)bmp180_basic_deinit();
 
         return 1;
     }
@@ -82,7 +82,7 @@ for (i = 0; i < 3; i++)
 
 ...
 
-bmp180_basic_deinit();
+(void)bmp180_basic_deinit();
 
 return 0;
 ```

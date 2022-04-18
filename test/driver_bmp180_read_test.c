@@ -49,12 +49,12 @@ static bmp180_handle_t gs_handle;        /**< bmp180 handle */
  */
 uint8_t bmp180_read_test(uint32_t times)
 {
-    volatile uint8_t res;
-    volatile uint32_t i;
-    volatile uint16_t temperature_yaw;
-    volatile float temperature_c;
-    volatile uint32_t pressure_yaw;
-    volatile uint32_t pressure_pa;
+    uint8_t res;
+    uint32_t i;
+    uint16_t temperature_yaw;
+    float temperature_c;
+    uint32_t pressure_yaw;
+    uint32_t pressure_pa;
     bmp180_info_t info;
     
     /* link interface function */
@@ -68,7 +68,7 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* get bmp180 info */
     res = bmp180_info(&info);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get info failed.\n");
        
@@ -91,7 +91,7 @@ uint8_t bmp180_read_test(uint32_t times)
     /* start read test */
     bmp180_interface_debug_print("bmp180: start read test.\n");
     res = bmp180_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: init failed.\n");
        
@@ -100,20 +100,20 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* set ultra_low mode */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_ULTRA_LOW);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set ultra low mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
-    for (i=0; i<times; i++)
+    for (i = 0; i < times; i++)
     {
         res = bmp180_read_temperature_pressure(&gs_handle, (uint16_t *)&temperature_yaw, (float *)&temperature_c, (uint32_t *)&pressure_yaw, (uint32_t *)&pressure_pa);
-        if (res)
+        if (res != 0)
         {
             bmp180_interface_debug_print("bmp180: read failed.\n");
-            bmp180_deinit(&gs_handle); 
+            (void)bmp180_deinit(&gs_handle); 
             
             return 1;
         }
@@ -124,20 +124,20 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* set standard mode */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_STANDARD);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set standard mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
-    for (i=0; i<times; i++)
+    for (i = 0; i < times; i++)
     {
         res = bmp180_read_temperature_pressure(&gs_handle, (uint16_t *)&temperature_yaw, (float *)&temperature_c, (uint32_t *)&pressure_yaw, (uint32_t *)&pressure_pa);
-        if (res)
+        if (res != 0)
         {
             bmp180_interface_debug_print("bmp180: read failed.\n");
-            bmp180_deinit(&gs_handle); 
+            (void)bmp180_deinit(&gs_handle); 
             
             return 1;
         }
@@ -148,20 +148,20 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* set high mode */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_HIGH);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set high mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
-    for (i=0; i<times; i++)
+    for (i = 0; i < times; i++)
     {
         res = bmp180_read_temperature_pressure(&gs_handle, (uint16_t *)&temperature_yaw, (float *)&temperature_c, (uint32_t *)&pressure_yaw, (uint32_t *)&pressure_pa);
-        if (res)
+        if (res != 0)
         {
             bmp180_interface_debug_print("bmp180: read failed.\n");
-            bmp180_deinit(&gs_handle); 
+            (void)bmp180_deinit(&gs_handle); 
             
             return 1;
         }
@@ -172,20 +172,20 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* set ultra_high mode */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_ULTRA_HIGH);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set ultra high mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
-    for (i=0; i<times; i++)
+    for (i = 0; i < times; i++)
     {
         res = bmp180_read_temperature_pressure(&gs_handle, (uint16_t *)&temperature_yaw, (float *)&temperature_c, (uint32_t *)&pressure_yaw, (uint32_t *)&pressure_pa);
-        if (res)
+        if (res != 0)
         {
             bmp180_interface_debug_print("bmp180: read failed.\n");
-            bmp180_deinit(&gs_handle); 
+            (void)bmp180_deinit(&gs_handle); 
             
             return 1;
         }
@@ -196,7 +196,7 @@ uint8_t bmp180_read_test(uint32_t times)
     
     /* finish read test */
     bmp180_interface_debug_print("bmp180: finish read test.\n");
-    bmp180_deinit(&gs_handle); 
+    (void)bmp180_deinit(&gs_handle); 
     
     return 0;
 }

@@ -9,7 +9,7 @@ var group__bmp180__base__driver =
       [ "ac6", "structbmp180__handle__s.html#ad471ddd672296691cf38fbd6e644654b", null ],
       [ "b1", "structbmp180__handle__s.html#af2540846a96bb3f5434bd073438c7b61", null ],
       [ "b2", "structbmp180__handle__s.html#a2a42037814d107231e837b122a94b140", null ],
-      [ "debug_print", "structbmp180__handle__s.html#a75f9f50c23e87e9407f9ec4e34bb42f2", null ],
+      [ "debug_print", "structbmp180__handle__s.html#a769d5b3a6c14790a0e126e8fe70b384b", null ],
       [ "delay_ms", "structbmp180__handle__s.html#a406c9433252b7366de417b7a60915c81", null ],
       [ "iic_deinit", "structbmp180__handle__s.html#af6963bbad902ca6e43942b48c07986c3", null ],
       [ "iic_init", "structbmp180__handle__s.html#a8826dd07625f8d90859ce9bd09628d61", null ],
