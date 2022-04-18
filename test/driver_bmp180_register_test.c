@@ -48,7 +48,7 @@ static bmp180_handle_t gs_handle;        /**< bmp180 handle */
  */
 uint8_t bmp180_register_test(void)
 {
-    volatile uint8_t res;
+    uint8_t res;
     bmp180_mode_t mode;
     bmp180_info_t info;
     
@@ -63,7 +63,7 @@ uint8_t bmp180_register_test(void)
     
     /* get bmp180 info */
     res = bmp180_info(&info);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get info failed.\n");
        
@@ -86,7 +86,7 @@ uint8_t bmp180_register_test(void)
     /* start register test */
     bmp180_interface_debug_print("bmp180: start register test.\n");
     res = bmp180_init(&gs_handle);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: init failed.\n");
        
@@ -98,19 +98,19 @@ uint8_t bmp180_register_test(void)
     
     /* set BMP180_MODE_ULTRA_LOW */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_ULTRA_LOW);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
     bmp180_interface_debug_print("bmp180: set ultra low mode.\n");
     res = bmp180_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
@@ -118,19 +118,19 @@ uint8_t bmp180_register_test(void)
     
     /* set BMP180_MODE_STANDARD */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_STANDARD);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
     bmp180_interface_debug_print("bmp180: set standard mode.\n");
     res = bmp180_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
@@ -138,19 +138,19 @@ uint8_t bmp180_register_test(void)
     
     /* set BMP180_MODE_HIGH */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_HIGH);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
     bmp180_interface_debug_print("bmp180: set high mode.\n");
     res = bmp180_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
@@ -158,19 +158,19 @@ uint8_t bmp180_register_test(void)
     
     /* set BMP180_MODE_ULTRA_HIGH */
     res = bmp180_set_mode(&gs_handle, BMP180_MODE_ULTRA_HIGH);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: set mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }
     bmp180_interface_debug_print("bmp180: set ultra high mode.\n");
     res = bmp180_get_mode(&gs_handle, &mode);
-    if (res)
+    if (res != 0)
     {
         bmp180_interface_debug_print("bmp180: get mode failed.\n");
-        bmp180_deinit(&gs_handle); 
+        (void)bmp180_deinit(&gs_handle); 
         
         return 1;
     }        
@@ -178,7 +178,7 @@ uint8_t bmp180_register_test(void)
     
     /* finish register test */
     bmp180_interface_debug_print("bmp180: finish register test.\n");
-    bmp180_deinit(&gs_handle); 
+    (void)bmp180_deinit(&gs_handle); 
 
     return 0;
 }

@@ -1,4 +1,4 @@
-[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md)
+[English](/README.md) | [ 简体中文](/README_zh-Hans.md) | [繁體中文](/README_zh-Hant.md) | [日本語](/README_ja.md) | [Deutsch](/README_de.md) | [한국어](/README_ko.md)
 
 <div align=center>
 <img src="/doc/image/logo.png"/>
@@ -6,11 +6,11 @@
 
 ## LibDriver BMP180
 
-[![API](https://img.shields.io/badge/api-reference-blue)](https://www.libdriver.com/docs/bmp180/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
+[![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/bmp180/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
 The BMP180 is the function compatible successor of the BMP085, a new generation of high precision digital pressure sensors for consumer applications.The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones, PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at fast conversion time, the BMP180 offers superior performance. The IIC interface allows for easy system integration with a microcontroller.The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as well as long term stability.
 
-LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on.
+LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on. LibDriver is MISRA compliant.
 
 ### Table of Contents
 
@@ -56,7 +56,7 @@ float temperature;
 uint32_t pressure;
 
 res = bmp180_basic_init();
-if (res)
+if (res != 0)
 {
     return 1;
 }
@@ -67,9 +67,9 @@ for (i = 0; i < 3; i++)
 {
     bmp180_interface_delay_ms(1000);
     res = bmp180_basic_read((float *)&temperature, (uint32_t *)&pressure);
-    if (res)
+    if (res != 0)
     {
-        bmp180_basic_deinit();
+        (void)bmp180_basic_deinit();
 
         return 1;
     }
@@ -82,7 +82,7 @@ for (i = 0; i < 3; i++)
 
 ...
 
-bmp180_basic_deinit();
+(void)bmp180_basic_deinit();
 
 return 0;
 ```
