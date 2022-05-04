@@ -27,15 +27,15 @@ LibDriver BMP180 ist ein voll funktionsfähiger Treiber von BMP180, der von LibD
 
 /src enthält LibDriver BMP180-Quelldateien.
 
-/interface enthält die plattformunabhängige Vorlage LibDriver BMP180 IIC。
+/interface enthält die plattformunabhängige Vorlage LibDriver BMP180 IIC.
 
-/test enthält den Testcode des LibDriver BMP180-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen。
+/test enthält den Testcode des LibDriver BMP180-Treibers und dieser Code kann die erforderliche Funktion des Chips einfach testen.
 
 /example enthält LibDriver BMP180-Beispielcode.
 
 /doc enthält das LibDriver BMP180-Offlinedokument.
 
-/Datenblatt enthält BMP180-Datenblatt。
+/Datenblatt enthält BMP180-Datenblat.
 
 /project enthält den allgemeinen Beispielcode für Linux- und MCU-Entwicklungsboards. Alle Projekte verwenden das Shell-Skript, um den Treiber zu debuggen, und die detaillierten Anweisungen finden Sie in der README.md jedes Projekts.
 
