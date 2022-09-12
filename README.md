@@ -27,15 +27,15 @@ LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It pr
 
 /src includes LibDriver BMP180 source files.
 
-/interface includes LibDriver BMP180 IIC platform independent template。
+/interface includes LibDriver BMP180 IIC platform independent template.
 
-/test includes LibDriver BMP180 driver test code and this code can test the chip necessary function simply。
+/test includes LibDriver BMP180 driver test code and this code can test the chip necessary function simply.
 
 /example includes LibDriver BMP180 sample code.
 
 /doc includes LibDriver BMP180 offline document.
 
-/datasheet includes BMP180 datasheet。
+/datasheet includes BMP180 datasheet.
 
 /project includes the common Linux and MCU development board sample code. All projects use the shell script to debug the driver and the detail instruction can be found in each project's README.md.
 
@@ -50,6 +50,8 @@ Add /src, /interface and /example to your project.
 #### example basic
 
 ```C
+#include "driver_bmp180_basic.h"
+
 uint8_t res;
 uint32_t i;
 float temperature;
