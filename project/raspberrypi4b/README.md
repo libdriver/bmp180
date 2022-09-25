@@ -1,22 +1,78 @@
-### 1. chip
+### 1. Chip
 
-#### 1.1 chip info
+#### 1.1 Chip Info
 
-chip name : Raspberry Pi 4B
+chip name : Raspberry Pi 4B.
 
-iic pin: SCL/SDA GPIO3/GPIO2
+iic pin: SCL/SDA GPIO3/GPIO2.
 
-### 2. install
+### 2. Install
 
-#### 2.1 install info
+#### 2.1 Dependencies
+
+Install the necessary dependencies.
+
+```shell
+sudo apt-get install libgpiod-dev pkg-config cmake -y
+```
+
+#### 2.2 Makefile
+
+Build the project.
 
 ```shell
 make
 ```
 
-### 3. bmp180
+Install the project and this is optional.
 
-#### 3.1 command Instruction
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+#### 2.3 CMake
+
+Build the project.
+
+```shell
+mkdir build && cd build 
+cmake .. 
+make
+```
+
+Install the project and this is optional.
+
+```shell
+sudo make install
+```
+
+Uninstall the project and this is optional.
+
+```shell
+sudo make uninstall
+```
+
+Test the project and this is optional.
+
+```shell
+make test
+```
+
+Find the compiled library in CMake. 
+
+```cmake
+find_package(bmp180 REQUIRED)
+```
+
+### 3. BMP180
+
+#### 3.1 Command Instruction
 
 ​          bmp180 is a basic command which can test all bmp180 driver function:
 
@@ -34,7 +90,7 @@ make
 
 ​           -c read <times>        run bmp180 read function.times means read times.
 
-#### 3.2 command example
+#### 3.2 Command Example
 
 ```shell
 ./bmp180 -i
