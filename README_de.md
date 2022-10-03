@@ -50,6 +50,8 @@ Fügen Sie /src, /interface und /example zu Ihrem Projekt hinzu.
 #### example basic
 
 ```C
+#include "driver_bmp180_basic.h"
+
 uint8_t res;
 uint32_t i;
 float temperature;

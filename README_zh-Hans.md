@@ -50,6 +50,8 @@ LibDriver BMP180是LibDriver推出的BMP180的全功能驱动，该驱动提供�
 #### example basic
 
 ```C
+#include "driver_bmp180_basic.h"
+
 uint8_t res;
 uint32_t i;
 float temperature;
