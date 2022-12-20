@@ -73,10 +73,10 @@ typedef enum
  */
 typedef struct bmp180_handle_s
 {
-    uint8_t (*iic_init)(void);                                                          /**< point to a iic_init function address */
-    uint8_t (*iic_deinit)(void);                                                        /**< point to a iic_deinit function address */
-    uint8_t (*iic_read)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);         /**< point to a iic_read function address */
-    uint8_t (*iic_write)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);        /**< point to a iic_write function address */
+    uint8_t (*iic_init)(void);                                                          /**< point to an iic_init function address */
+    uint8_t (*iic_deinit)(void);                                                        /**< point to an iic_deinit function address */
+    uint8_t (*iic_read)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);         /**< point to an iic_read function address */
+    uint8_t (*iic_write)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);        /**< point to an iic_write function address */
     void (*delay_ms)(uint32_t ms);                                                      /**< point to a delay_ms function address */
     void (*debug_print)(const char *const fmt, ...);                                    /**< point to a debug_print function address */
     uint8_t inited;                                                                     /**< inited flag */
@@ -132,7 +132,7 @@ typedef struct bmp180_info_s
 /**
  * @brief     link iic_init function
  * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a iic_init function address
+ * @param[in] FUC points to an iic_init function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_INIT(HANDLE, FUC)    (HANDLE)->iic_init = FUC
@@ -140,7 +140,7 @@ typedef struct bmp180_info_s
 /**
  * @brief     link iic_deinit function
  * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a iic_deinit function address
+ * @param[in] FUC points to an iic_deinit function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_DEINIT(HANDLE, FUC)  (HANDLE)->iic_deinit = FUC
@@ -148,7 +148,7 @@ typedef struct bmp180_info_s
 /**
  * @brief     link iic_read function
  * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a iic_read function address
+ * @param[in] FUC points to an iic_read function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_READ(HANDLE, FUC)    (HANDLE)->iic_read = FUC
@@ -156,7 +156,7 @@ typedef struct bmp180_info_s
 /**
  * @brief     link iic_write function
  * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a iic_write function address
+ * @param[in] FUC points to an iic_write function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_WRITE(HANDLE, FUC)   (HANDLE)->iic_write = FUC
@@ -308,7 +308,7 @@ uint8_t bmp180_get_mode(bmp180_handle_t *handle, bmp180_mode_t *mode);
  * @brief     set the chip register
  * @param[in] *handle points to a bmp180 handle structure
  * @param[in] reg is the iic register address
- * @param[in] value is the data written to the register
+ * @param[in] value is the data write to the register
  * @return    status code
  *            - 0 success
  *            - 1 write failed
