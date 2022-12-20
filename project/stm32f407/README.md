@@ -2,47 +2,79 @@
 
 #### 1.1 Chip Info
 
-chip name : STM32F407ZGT6.
+Chip Name: STM32F407ZGT6.
 
-extern oscillator : 8MHz.
+Extern Oscillator: 8MHz.
 
-uart pin: TX/RX PA9/PA10.
+UART Pin: TX/RX PA9/PA10.
 
-iic pin: SCL/SDA PB8/PB9.
+IIC Pin: SCL/SDA PB8/PB9.
 
-### 2. Shell
+### 2. Development and Debugging
 
-#### 2.1 Shell Parameter
+#### 2.1 Integrated Development Environment
 
-baud rate: 115200.
+LidDriver provides both Keil and IAR integrated development environment projects.
 
-data bits : 8.
+MDK is the Keil ARM project and your Keil version must be 5 or higher.Keil ARM project needs STMicroelectronics STM32F4 Series Device Family Pack and you can download from https://www.keil.com/dd2/stmicroelectronics/stm32f407zgtx.
 
-stop bits: 1.
+EW is the IAR ARM project and your IAR version must be 9 or higher.
 
-parity: none.
+#### 2.2 Serial Port Parameter
 
-flow control: none.
+Baud Rate: 115200.
+
+Data Bits : 8.
+
+Stop Bits: 1.
+
+Parity: None.
+
+Flow Control: None.
+
+#### 2.3 Serial Port Assistant
+
+We use '\n' to wrap lines.If your serial port assistant displays exceptions (e.g. the displayed content does not divide lines), please modify the configuration of your serial port assistant or replace one that supports '\n' parsing.
 
 ### 3. BMP180
 
 #### 3.1 Command Instruction
 
-​          bmp180 is a basic command which can test all bmp180 driver function:
+1. Show bmp180 chip and driver information.
 
-​           -i         show bmp180 chip and driver information.
+   ```shell
+   bmp180 (-i | --information)
+   ```
 
-​           -h        show bmp180 help.
+2. Show bmp180 help.
 
-​           -p        show bmp180 pin connections of the current board.
+   ```shell
+   bmp180 (-h | --help)
+   ```
 
-​           -t (reg | read <times>) 
+3. Show bmp180 pin connections of the current board.
 
-​           -t reg        run bmp180 register test.
+   ```shell
+   bmp180 (-p | --port)
+   ```
 
-​           -t read <times>        run bmp180 read test. times means test times.         
+4. Run bmp180 register test.
 
-​           -c read <times>        run bmp180 read function.times means read times.
+   ```shell
+   bmp180 (-t reg | --test=reg)
+   ```
+
+5. Run bmp180 read test, times means test times. 
+
+   ```shell
+   bmp180 (-t read | --test=read) [--times=<num>]
+   ```
+
+6. Run bmp180 read function, times means read times.
+
+   ```shell
+   bmp180 (-e read | --example=read) [--times=<num>]
+   ```
 
 #### 3.2 Command Example
 
@@ -93,7 +125,7 @@ bmp180: finish register test.
 ```
 
 ```shell
-bmp180 -t read 3
+bmp180 -t read --times=3
 
 bmp180: chip is Bosch BMP180.
 bmp180: manufacturer is Bosch.
@@ -105,61 +137,65 @@ bmp180: max current is 0.65mA.
 bmp180: max temperature is 85.0C.
 bmp180: min temperature is -40.0C.
 bmp180: start read test.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102562Pa.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102565Pa.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102565Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102566Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102566Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102560Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102567Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102563Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102566Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102573Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102563Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102571Pa.
+bmp180: ultra low mode temperature: 28.6C.
+bmp180: ultra low mode pressure: 101463Pa.
+bmp180: ultra low mode temperature: 28.6C.
+bmp180: ultra low mode pressure: 101457Pa.
+bmp180: ultra low mode temperature: 28.5C.
+bmp180: ultra low mode pressure: 101457Pa.
+bmp180: standard mode temperature: 28.5C.
+bmp180: standard mode pressure: 101467Pa.
+bmp180: standard mode temperature: 28.5C.
+bmp180: standard mode pressure: 101449Pa.
+bmp180: standard mode temperature: 28.4C.
+bmp180: standard mode pressure: 101455Pa.
+bmp180: high mode temperature: 28.4C.
+bmp180: high mode pressure: 101460Pa.
+bmp180: high mode temperature: 28.3C.
+bmp180: high mode pressure: 101462Pa.
+bmp180: high mode temperature: 28.3C.
+bmp180: high mode pressure: 101454Pa.
+bmp180: ultra highmode temperature: 28.3C.
+bmp180: ultra highmode pressure: 101456Pa.
+bmp180: ultra highmode temperature: 28.2C.
+bmp180: ultra highmode pressure: 101458Pa.
+bmp180: ultra highmode temperature: 28.2C.
+bmp180: ultra highmode pressure: 101460Pa.
 bmp180: finish read test.
 ```
 
 ```shell
-bmp180 -c read 3
+bmp180 -e read --times=3
 
 bmp180: 1/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102387Pa.
+bmp180: temperature is 28.80C.
+bmp180: pressure is 101470Pa.
 bmp180: 2/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102370Pa.
+bmp180: temperature is 28.70C.
+bmp180: pressure is 101461Pa.
 bmp180: 3/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102373Pa.
+bmp180: temperature is 28.60C.
+bmp180: pressure is 101457Pa.
 ```
 
 ```shell
 bmp180 -h
 
-bmp180 -i
-	show bmp180 chip and driver information.
-bmp180 -h
-	show bmp180 help.
-bmp180 -p
-	show bmp180 pin connections of the current board.
-bmp180 -t reg
-	run bmp180 register test.
-bmp180 -t read <times>
-	run bmp180 read test.times means test times.
-bmp180 -c read <times>
-	run bmp180 read function.times means read times.
+Usage:
+  bmp180 (-i | --information)
+  bmp180 (-h | --help)
+  bmp180 (-p | --port)
+  bmp180 (-t reg | --test=reg)
+  bmp180 (-t read | --test=read) [--times=<num>]
+  bmp180 (-e read | --example=read) [--times=<num>]
+
+Options:
+  -e <read>, --example=<read>     Run the driver example.
+  -h, --help                      Show the help.
+  -i, --information               Show the chip information.
+  -p, --port                      Display the pin connections of the current board.
+  -t <reg | read>, --test=<reg | read>
+                                  Run the driver test.
+      --times=<num>               Set the running times.([default: 3])
 ```
 

@@ -114,7 +114,7 @@ static uint8_t a_bmp180_iic_read(bmp180_handle_t *handle, uint8_t addr, uint8_t 
  * @param[in] *handle points to a bmp180 handle structure
  * @param[in] addr is the iic device address
  * @param[in] reg is the iic register address
- * @param[in] data is the written data
+ * @param[in] data is the write data
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -765,7 +765,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
  * @brief     set the chip register
  * @param[in] *handle points to a bmp180 handle structure
  * @param[in] reg is the iic register address
- * @param[in] value is the data written to the register
+ * @param[in] value is the data write to the register
  * @return    status code
  *            - 0 success
  *            - 1 write failed

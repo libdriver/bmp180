@@ -1,10 +1,10 @@
-### 1. Chip
+### 1. Board
 
-#### 1.1 Chip Info
+#### 1.1 Board Info
 
-chip name : Raspberry Pi 4B.
+Board Name: Raspberry Pi 4B.
 
-iic pin: SCL/SDA GPIO3/GPIO2.
+IIC Pin: SCL/SDA GPIO3/GPIO2.
 
 ### 2. Install
 
@@ -74,21 +74,41 @@ find_package(bmp180 REQUIRED)
 
 #### 3.1 Command Instruction
 
-​          bmp180 is a basic command which can test all bmp180 driver function:
+1. Show bmp180 chip and driver information.
 
-​           -i         show bmp180 chip and driver information.
+   ```shell
+   bmp180 (-i | --information)
+   ```
 
-​           -h        show bmp180 help.
+2. Show bmp180 help.
 
-​           -p        show bmp180 pin connections of the current board.
+   ```shell
+   bmp180 (-h | --help)
+   ```
 
-​           -t (reg | read <times>) 
+3. Show bmp180 pin connections of the current board.
 
-​           -t reg        run bmp180 register test.
+   ```shell
+   bmp180 (-p | --port)
+   ```
 
-​           -t read <times>        run bmp180 read test. times means test times.         
+4. Run bmp180 register test.
 
-​           -c read <times>        run bmp180 read function.times means read times.
+   ```shell
+   bmp180 (-t reg | --test=reg)
+   ```
+
+5. Run bmp180 read test, times means test times. 
+
+   ```shell
+   bmp180 (-t read | --test=read) [--times=<num>]
+   ```
+
+6. Run bmp180 read function, times means read times.
+
+   ```shell
+   bmp180 (-e read | --example=read) [--times=<num>]
+   ```
 
 #### 3.2 Command Example
 
@@ -139,7 +159,7 @@ bmp180: finish register test.
 ```
 
 ```shell
-./bmp180 -t read 3
+./bmp180 -t read --times=3
 
 bmp180: chip is Bosch BMP180.
 bmp180: manufacturer is Bosch.
@@ -151,61 +171,65 @@ bmp180: max current is 0.65mA.
 bmp180: max temperature is 85.0C.
 bmp180: min temperature is -40.0C.
 bmp180: start read test.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102562Pa.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102565Pa.
-bmp180: ultra low mode temperature: 25.0C.
-bmp180: ultra low mode pressure: 102565Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102566Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102566Pa.
-bmp180: standard mode temperature: 25.0C.
-bmp180: standard mode pressure: 102560Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102567Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102563Pa.
-bmp180: high mode temperature: 25.0C.
-bmp180: high mode pressure: 102566Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102573Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102563Pa.
-bmp180: ultra highmode temperature: 25.0C.
-bmp180: ultra highmode pressure: 102571Pa.
+bmp180: ultra low mode temperature: 28.4C.
+bmp180: ultra low mode pressure: 101468Pa.
+bmp180: ultra low mode temperature: 28.4C.
+bmp180: ultra low mode pressure: 101459Pa.
+bmp180: ultra low mode temperature: 28.3C.
+bmp180: ultra low mode pressure: 101465Pa.
+bmp180: standard mode temperature: 28.3C.
+bmp180: standard mode pressure: 101462Pa.
+bmp180: standard mode temperature: 28.2C.
+bmp180: standard mode pressure: 101456Pa.
+bmp180: standard mode temperature: 28.2C.
+bmp180: standard mode pressure: 101460Pa.
+bmp180: high mode temperature: 28.2C.
+bmp180: high mode pressure: 101460Pa.
+bmp180: high mode temperature: 28.1C.
+bmp180: high mode pressure: 101460Pa.
+bmp180: high mode temperature: 28.1C.
+bmp180: high mode pressure: 101470Pa.
+bmp180: ultra highmode temperature: 28.1C.
+bmp180: ultra highmode pressure: 101458Pa.
+bmp180: ultra highmode temperature: 28.1C.
+bmp180: ultra highmode pressure: 101461Pa.
+bmp180: ultra highmode temperature: 28.0C.
+bmp180: ultra highmode pressure: 101462Pa.
 bmp180: finish read test.
 ```
 
 ```shell
-./bmp180 -c read 3
+./bmp180 -e read --times=3
 
 bmp180: 1/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102387Pa.
+bmp180: temperature is 27.20C.
+bmp180: pressure is 101459Pa.
 bmp180: 2/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102370Pa.
+bmp180: temperature is 27.20C.
+bmp180: pressure is 101459Pa.
 bmp180: 3/3.
-bmp180: temperature is 24.90C.
-bmp180: pressure is 102373Pa.
+bmp180: temperature is 27.20C.
+bmp180: pressure is 101457Pa.
 ```
 
 ```shell
 ./bmp180 -h
 
-bmp180 -i
-	show bmp180 chip and driver information.
-bmp180 -h
-	show bmp180 help.
-bmp180 -p
-	show bmp180 pin connections of the current board.
-bmp180 -t reg
-	run bmp180 register test.
-bmp180 -t read <times>
-	run bmp180 read test.times means test times.
-bmp180 -c read <times>
-	run bmp180 read function.times means read times.
+Usage:
+  bmp180 (-i | --information)
+  bmp180 (-h | --help)
+  bmp180 (-p | --port)
+  bmp180 (-t reg | --test=reg)
+  bmp180 (-t read | --test=read) [--times=<num>]
+  bmp180 (-e read | --example=read) [--times=<num>]
+
+Options:
+  -e <read>, --example=<read>     Run the driver example.
+  -h, --help                      Show the help.
+  -i, --information               Show the chip information.
+  -p, --port                      Display the pin connections of the current board.
+  -t <reg | read>, --test=<reg | read>
+                                  Run the driver test.
+      --times=<num>               Set the running times.([default: 3])
 ```
 
