@@ -98,13 +98,13 @@ find_package(bmp180 REQUIRED)
    bmp180 (-t reg | --test=reg)
    ```
 
-5. Run bmp180 read test, times means test times. 
+5. Run bmp180 read test, num means test times. 
 
    ```shell
    bmp180 (-t read | --test=read) [--times=<num>]
    ```
 
-6. Run bmp180 read function, times means read times.
+6. Run bmp180 read function, num means read times.
 
    ```shell
    bmp180 (-e read | --example=read) [--times=<num>]
