@@ -189,8 +189,8 @@ uint8_t bmp180_read_test(uint32_t times)
             
             return 1;
         }
-        bmp180_interface_debug_print("bmp180: ultra highmode temperature: %.01fC.\n", temperature_c);
-        bmp180_interface_debug_print("bmp180: ultra highmode pressure: %dPa.\n", pressure_pa);
+        bmp180_interface_debug_print("bmp180: ultra high mode temperature: %.01fC.\n", temperature_c);
+        bmp180_interface_debug_print("bmp180: ultra high mode pressure: %dPa.\n", pressure_pa);
         bmp180_interface_delay_ms(1000);
     }
     

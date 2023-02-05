@@ -75,7 +75,7 @@ uint8_t bmp180(uint8_t argc, char **argv)
         {"times", required_argument, NULL, 1},
         {NULL, 0, NULL, 0},
     };
-    char type[33] = "unknow";
+    char type[33] = "unknown";
     uint32_t times = 3;
     
     /* if no params */
@@ -306,7 +306,7 @@ int main(void)
     /* uart init */
     uart_init(115200);
     
-    /* shell init && register bmp180 fuction */
+    /* shell init && register bmp180 function */
     shell_init();
     shell_register("bmp180", bmp180);
     uart_print("bmp180: welcome to libdriver bmp180.\n");
@@ -329,7 +329,7 @@ int main(void)
             }
             else if (res == 2)
             {
-                uart_print("bmp180: unknow command.\n");
+                uart_print("bmp180: unknown command.\n");
             }
             else if (res == 3)
             {
@@ -345,7 +345,7 @@ int main(void)
             }
             else
             {
-                uart_print("bmp180: unknow status code.\n");
+                uart_print("bmp180: unknown status code.\n");
             }
             uart_flush();
         }

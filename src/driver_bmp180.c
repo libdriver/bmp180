@@ -729,7 +729,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     {
         handle->debug_print("bmp180: oss param error.\n");                                             /* oss param error */
         
-        return 1;                                                                                      /* return errror */
+        return 1;                                                                                      /* return error */
     }
     x1 = (((ut - (int32_t)handle->ac6) * (int32_t)handle->ac5)) >> 15;                                 /* calculate x1 */
     x2 = (int32_t)((((int32_t)handle->mc) << 11) / (x1 + (int32_t)handle->md));                        /* calculate x2 */
@@ -837,7 +837,7 @@ uint8_t bmp180_info(bmp180_info_t *info)
     info->max_current_ma = MAX_CURRENT;                             /* set maximum current */
     info->temperature_max = TEMPERATURE_MAX;                        /* set minimal temperature */
     info->temperature_min = TEMPERATURE_MIN;                        /* set maximum temperature */
-    info->driver_version = DRIVER_VERSION;                          /* set driver verison */
+    info->driver_version = DRIVER_VERSION;                          /* set driver version */
     
     return 0;                                                       /* success return 0 */
 }
