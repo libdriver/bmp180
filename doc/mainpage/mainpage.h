@@ -1,6 +1,6 @@
 /**
  * @mainpage  LibDriver BMP180
- * @brief     libdriver bmp180 is a full function driver of bmp180 and it can run in both MCU and Linux platform.
+ * @brief     LibDriver BMP180 is a full function driver of BMP180 and it can run in both MCU and Linux platform.
  * @version   2.0.0
  * @author    Shifeng Li
  *
