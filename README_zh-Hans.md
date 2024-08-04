@@ -8,7 +8,7 @@
 
 [![MISRA](https://img.shields.io/badge/misra-compliant-brightgreen.svg)](/misra/README.md) [![API](https://img.shields.io/badge/api-reference-blue.svg)](https://www.libdriver.com/docs/bmp180/index.html) [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](/LICENSE)
 
-BMP180是BMP085的功能兼容后继产品，是新一代高性能消费类应用的精密数字压力传感器。BMP180的超低功耗、低电压供电经过特别优化设计，可用于移动电话、PDA、GPS导航设备和户外设备。在只有0.25米的低海拔条件下拥有快速转换时间，BMP180提供卓越的性能。I2C接口允许与微控制器系统集成。BMP180基于压阻技术，具有EMC鲁棒性、高精度和线性度以及长期稳定。
+BMP180是BMP085的功能兼容后继产品，是新一代高性能消费类应用的精密数字压力传感器。BMP180的超低功耗、低电压供电经过特别优化设计，可用于移动电话、PDA、GPS导航设备和户外设备。在只有0.25米的低海拔条件下拥有快速转换时间，BMP180提供卓越的性能。I2C接口允许与微控制器系统集成。BMP180基于压阻技术，具有EMC鲁棒性、高精度和线性度以及长期稳定性。
 
 LibDriver BMP180是LibDriver推出的BMP180的全功能驱动，该驱动提供温度、压力读取和模式设置等功能并且它符合MISRA标准。
 
