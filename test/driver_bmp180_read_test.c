@@ -41,7 +41,7 @@ static bmp180_handle_t gs_handle;        /**< bmp180 handle */
 
 /**
  * @brief     read test
- * @param[in] times is the read times
+ * @param[in] times test times
  * @return    status code
  *            - 0 success
  *            - 1 test failed
