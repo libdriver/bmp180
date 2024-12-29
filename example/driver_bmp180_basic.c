@@ -83,8 +83,8 @@ uint8_t bmp180_basic_init(void)
 
 /**
  * @brief      basic example read
- * @param[out] *temperature points to a converted temperature buffer
- * @param[out] *pressure points to a converted pressure buffer
+ * @param[out] *temperature pointer to a converted temperature buffer
+ * @param[out] *pressure pointer to a converted pressure buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed

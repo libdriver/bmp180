@@ -123,56 +123,56 @@ typedef struct bmp180_info_s
 
 /**
  * @brief     initialize bmp180_handle_t structure
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] STRUCTURE is bmp180_handle_t
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] STRUCTURE bmp180_handle_t
  * @note      none
  */
 #define DRIVER_BMP180_LINK_INIT(HANDLE, STRUCTURE)   memset(HANDLE, 0, sizeof(STRUCTURE))
 
 /**
  * @brief     link iic_init function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to an iic_init function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to an iic_init function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_INIT(HANDLE, FUC)    (HANDLE)->iic_init = FUC
 
 /**
  * @brief     link iic_deinit function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to an iic_deinit function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to an iic_deinit function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_DEINIT(HANDLE, FUC)  (HANDLE)->iic_deinit = FUC
 
 /**
  * @brief     link iic_read function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to an iic_read function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to an iic_read function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_READ(HANDLE, FUC)    (HANDLE)->iic_read = FUC
 
 /**
  * @brief     link iic_write function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to an iic_write function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to an iic_write function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_IIC_WRITE(HANDLE, FUC)   (HANDLE)->iic_write = FUC
 
 /**
  * @brief     link delay_ms function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a delay_ms function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to a delay_ms function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_DELAY_MS(HANDLE, FUC)    (HANDLE)->delay_ms = FUC
 
 /**
  * @brief     link debug_print function
- * @param[in] HANDLE points to a bmp180 handle structure
- * @param[in] FUC points to a debug_print function address
+ * @param[in] HANDLE pointer to a bmp180 handle structure
+ * @param[in] FUC pointer to a debug_print function address
  * @note      none
  */
 #define DRIVER_BMP180_LINK_DEBUG_PRINT(HANDLE, FUC) (HANDLE)->debug_print = FUC
@@ -190,7 +190,7 @@ typedef struct bmp180_info_s
 
 /**
  * @brief      get chip's information
- * @param[out] *info points to a bmp180 info structure
+ * @param[out] *info pointer to a bmp180 info structure
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -200,7 +200,7 @@ uint8_t bmp180_info(bmp180_info_t *info);
 
 /**
  * @brief     initialize the chip
- * @param[in] *handle points to a bmp180 handle structure
+ * @param[in] *handle pointer to a bmp180 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic initialization failed
@@ -214,7 +214,7 @@ uint8_t bmp180_init(bmp180_handle_t *handle);
 
 /**
  * @brief     close the chip
- * @param[in] *handle points to a bmp180 handle structure
+ * @param[in] *handle pointer to a bmp180 handle structure
  * @return    status code
  *            - 0 success
  *            - 1 iic deinit failed
@@ -226,11 +226,11 @@ uint8_t bmp180_deinit(bmp180_handle_t *handle);
 
 /**
  * @brief      read the temperature and pressure data
- * @param[in]  *handle points to a bmp180 handle structure
- * @param[out] *temperature_raw points to a raw temperature buffer
- * @param[out] *temperature_c points to a converted temperature buffer
- * @param[out] *pressure_raw points to a raw pressure buffer
- * @param[out] *pressure_pa points to a converted pressure buffer
+ * @param[in]  *handle pointer to a bmp180 handle structure
+ * @param[out] *temperature_raw pointer to a raw temperature buffer
+ * @param[out] *temperature_c pointer to a converted temperature buffer
+ * @param[out] *pressure_raw pointer to a raw pressure buffer
+ * @param[out] *pressure_pa pointer to a converted pressure buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
@@ -243,9 +243,9 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
 
 /**
  * @brief      read the pressure data
- * @param[in]  *handle points to a bmp180 handle structure
- * @param[out] *raw points to a raw pressure buffer
- * @param[out] *pa points to a converted pressure buffer
+ * @param[in]  *handle pointer to a bmp180 handle structure
+ * @param[out] *raw pointer to a raw pressure buffer
+ * @param[out] *pa pointer to a converted pressure buffer
  * @return     status code
  *             - 0 success
  *             - 1 pressure read failed
@@ -257,9 +257,9 @@ uint8_t bmp180_read_pressure(bmp180_handle_t *handle, uint32_t *raw, uint32_t *p
 
 /**
  * @brief      read the temperature data
- * @param[in]  *handle points to a bmp180 handle structure
- * @param[out] *raw points to a raw temperature buffer
- * @param[out] *c points to a converted temperature buffer
+ * @param[in]  *handle pointer to a bmp180 handle structure
+ * @param[out] *raw pointer to a raw temperature buffer
+ * @param[out] *c pointer to a converted temperature buffer
  * @return     status code
  *             - 0 success
  *             - 1 temperature read failed
@@ -271,8 +271,8 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
 
 /**
  * @brief     set the measurement mode
- * @param[in] *handle points to a bmp180 handle structure
- * @param[in] mode is the measurement mode
+ * @param[in] *handle pointer to a bmp180 handle structure
+ * @param[in] mode measurement mode
  * @return    status code
  *            - 0 success
  *            - 2 handle is NULL
@@ -283,8 +283,8 @@ uint8_t bmp180_set_mode(bmp180_handle_t *handle, bmp180_mode_t mode);
 
 /**
  * @brief      get the measurement mode
- * @param[in]  *handle points to a bmp180 handle structure
- * @param[out] *mode points to a measurement mode buffer
+ * @param[in]  *handle pointer to a bmp180 handle structure
+ * @param[out] *mode pointer to a measurement mode buffer
  * @return     status code
  *             - 0 success
  *             - 2 handle is NULL
@@ -306,9 +306,9 @@ uint8_t bmp180_get_mode(bmp180_handle_t *handle, bmp180_mode_t *mode);
 
 /**
  * @brief     set the chip register
- * @param[in] *handle points to a bmp180 handle structure
- * @param[in] reg is the iic register address
- * @param[in] value is the data write to the register
+ * @param[in] *handle pointer to a bmp180 handle structure
+ * @param[in] reg iic register address
+ * @param[in] value data written to the register
  * @return    status code
  *            - 0 success
  *            - 1 write failed
@@ -320,9 +320,9 @@ uint8_t bmp180_set_reg(bmp180_handle_t *handle, uint8_t reg, uint8_t value);
 
 /**
  * @brief      get the chip register
- * @param[in]  *handle points to a bmp180 handle structure
- * @param[in]  reg is the iic register address
- * @param[out] *value points to a read data buffer
+ * @param[in]  *handle pointer to a bmp180 handle structure
+ * @param[in]  reg iic register address
+ * @param[out] *value pointer to a read data buffer
  * @return     status code
  *             - 0 success
  *             - 1 read failed
