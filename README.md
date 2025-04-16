@@ -10,7 +10,7 @@
 
 The BMP180 is the function compatible successor of the BMP085, a new generation of high precision digital pressure sensors for consumer applications.The ultra-low power, low voltage electronics of the BMP180 is optimized for use in mobile phones, PDAs, GPS navigation devices and outdoor equipment. With a low altitude noise of merely 0.25m at fast conversion time, the BMP180 offers superior performance. The IIC interface allows for easy system integration with a microcontroller.The BMP180 is based on piezo-resistive technology for EMC robustness, high accuracy and linearity as well as long term stability.
 
-LibDriver BMP180 is a full function driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on. LibDriver is MISRA compliant.
+LibDriver BMP180 is a full-featured driver of BMP180 launched by LibDriver.It provides temperature, pressure reading and mode setting functions and so on. LibDriver is MISRA compliant.
 
 ### Table of Contents
 
