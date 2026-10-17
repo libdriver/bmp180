@@ -586,7 +586,7 @@ uint8_t bmp180_read_temperature(bmp180_handle_t *handle, uint16_t *raw, float *c
     x1 = (((ut - (int32_t)handle->ac6) * (int32_t)handle->ac5)) >> 15;                                 /* calculate x1 */
     x2 =(int32_t)((((int32_t)handle->mc) << 11) / (x1 + (int32_t)handle->md));                         /* calculate x2 */
     b5 = x1 + x2;                                                                                      /* calculate b5 */
-    *c = ((uint16_t)((b5 + 8) >> 4)) * 0.1f;                                                           /* calculate temperature */
+    *c = ((b5 + 8) >> 4) * 0.1f;                                                                       /* calculate temperature */
     
     return 0;                                                                                          /* success return 0 */
 }
@@ -734,7 +734,7 @@ uint8_t bmp180_read_temperature_pressure(bmp180_handle_t *handle, uint16_t *temp
     x1 = (((ut - (int32_t)handle->ac6) * (int32_t)handle->ac5)) >> 15;                                 /* calculate x1 */
     x2 = (int32_t)((((int32_t)handle->mc) << 11) / (x1 + (int32_t)handle->md));                        /* calculate x2 */
     b5 = x1 + x2;                                                                                      /* calculate b5 */
-    *temperature_c = ((uint16_t)((b5 + 8) >> 4)) * 0.1f;                                               /* get temperature */
+    *temperature_c = ((b5 + 8) >> 4) * 0.1f;                                                           /* get temperature */
     b6 = b5 - 4000;                                                                                    /* calculate b6 */
     x1 = ((int32_t)handle->b2 * ((b6 * b6) >> 12)) >> 11;                                              /* calculate x1 */
     x2 = ((int32_t)handle->ac2 * b6) >> 11;                                                            /* calculate x2 */
